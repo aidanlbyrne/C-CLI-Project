@@ -128,7 +128,7 @@ void printList(void)
 void editNode(int pri)
 {
     Node *current = head;
-    char *edit;
+    char edit[MAX];
     while (current)
     {
         if (current->priority != pri)
@@ -238,7 +238,7 @@ void printOptions(void)
     printf("2. Insert task into list\n");
     printf("3. Delete a task\n");
     printf("4. Read List\n");
-    // printf("\t5. Add a task\n");
+    printf("5. Edit a Task\n");
     printf("9. Quit\n");
 }
 
@@ -306,6 +306,13 @@ int main(int argc, char** argv)
                 case 4:
                     printList();
                     break;
+                case 5:
+                    printf("What priority would you like to edit:  ");
+                    scanf("%d", &pri);
+                    getchar();
+                    editNode(pri);
+                    break;
+                    
                 case 9:
                     break;
             }
