@@ -79,10 +79,8 @@ int insertNode(int pri, char* task)
     Node *current = head;
     Node *prev = NULL;
     Node *new = malloc(sizeof(Node));
-    // if (new == NULL) {return NULL;}
 
     new->priority = pri;
-    // new->task = task;
     strcpy(new->task, task);
 
     while (current)
@@ -122,8 +120,31 @@ void printList(void)
         printf("|*\tTask %d: ---   %s\n", current->priority, current->task);
         current=current->next;
     }
-    printf("---------------------------------------------------\n");
-    printf("\n");
+    printf("---------------------------------------------------\n\n");
+    return;
+}
+
+// Edit a Node
+void editNode(int pri)
+{
+    Node *current = head;
+    char *edit;
+    while (current)
+    {
+        if (current->priority != pri)
+        {
+            current = current->next;
+        } else {
+            break;
+        }
+    }
+    printf("%s\n", current->task);
+    // pop
+    
+    fgets(edit, MAX, stdin);
+    edit[strcspn(edit, "\n")] = 0;
+    strcpy(current->task, edit);
+
     return;
 }
 
