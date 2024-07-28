@@ -112,33 +112,86 @@ int insertNode(int pri, char* task)
 void printList(void)
 {
     Node *current = head;
+    printf("\x1b[2J");
+    printf("\x1b[H");
+    printf("\n");
+    printf("---------------------------------------------------\n");
     while (current)
     {
-        printf("Task %d:\t%s\n", current->priority, current->task);
+        // printf("|*\tTask %d:\t%s\n", current->priority, current->task);
+        printf("|*\tTask %d: ---   %s\n", current->priority, current->task);
         current=current->next;
     }
+    printf("---------------------------------------------------\n");
+    printf("\n");
     return;
 }
 
 // Reorganize Priority list
-void renumberList(void)
+void renumberList(int *length)
 {
     int pri = 1;
     Node *current = head;
 
     while (current)
     {
-        if (current->priority!=pri)
-        {
-            current->priority = pri;
-        }
+        current->priority = pri;
         current=current->next;
         pri++;
     }
+    *length = pri - 1;
     return;
 }
 
-// Reassign list
+// clear multiple
+/**
+    enter clear mode
+    give start number
+    cycle through list to find start
+    if (start not found){pri not found}
+    give end
+    cycle through list to find end 
+    set up:
+    * keep loop going until int
+    * while loop 
+
+*/
+
+int clearSet(int *length)
+{
+    Node *current = head;
+    int start = -1;
+    while (start != 0)
+    {
+        scanf("%d", &start);
+        getchar();
+        while (current->priority != start)
+        {
+            current = current->next;
+        }
+    }
+
+    return 0;
+}
+int party(void)
+{
+    int start = -1;
+    int end = -1;
+
+    while(1)
+    {
+        scanf("%d", &start);
+        getchar();
+        if (start ==0)
+        {
+            break;
+        }
+
+    }
+    return 0;
+}
+
+/**  Reassign list
 void reassign(Node *head)
 {
   Node *current = head;
@@ -155,22 +208,24 @@ void reassign(Node *head)
     current = current->next;
   }
 }
+*/
 
 // options
 void printOptions(void)
 {
-    printf("\t1. Add a task\n");
-    printf("\t2. Insert task into list\n");
-    printf("\t3. Delete a task\n");
-    printf("\t4. Read List\n");
+    printf("1. Add a task\n");
+    printf("2. Insert task into list\n");
+    printf("3. Delete a task\n");
+    printf("4. Read List\n");
     // printf("\t5. Add a task\n");
-    printf("\t9. Quit\n");
+    printf("9. Quit\n");
 }
 
 int main(int argc, char** argv)
 {
     
     int option = -1;
+    int length = 0;
     char task[MAX];
     int pri;
     printf("Welcome to the To-Do app\n");
@@ -189,17 +244,20 @@ int main(int argc, char** argv)
                     printf("What is your new Task?\n");
                     fgets(task, MAX, stdin);
                     task[strcspn(task, "\n")] = 0;
-                    
                     addNode(task);
                     printf("added\n");
-                    reassign(head);
+                    // reassign(head);
+                    renumberList(&length);
                     // option = -1;
                     break;
                 case 2:
                     printf("What is your new Task\n");
-                    scanf("%s", task);
+                    // scanf("%s", task);
+                    fgets(task, MAX, stdin);
+                    task[strcspn(task, "\n")] = 0;
                     printf("What priority does this task have:  ");
                     scanf("%d", &pri);
+                    getchar();
                     int done = insertNode(pri, task);
                     if (done)
                     {
@@ -207,7 +265,8 @@ int main(int argc, char** argv)
                     } else {
                         printf("Noded added to end of list\n");
                     }
-                    reassign(head);
+                    renumberList(&length);
+                                // reassign(head);
                     break;
                 case 3:
                     printf("What task have you completed?\n");
@@ -217,7 +276,7 @@ int main(int argc, char** argv)
                     if (success)
                     {
                         printf("Task successfully removed from list\n");
-                        reassign(head);
+                        renumberList(&length);
                     } else {
                         printf("No task in list had provided priority\n");
                         printf("No changes made\n");
