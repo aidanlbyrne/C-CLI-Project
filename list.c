@@ -3,10 +3,12 @@
 #include <string.h>
 
 #define MAX 64
+#define DAX 128
 
 typedef struct {
     int priority;
     char task[MAX];
+    char detail[DAX];
     void *next;
 } Node;
 
