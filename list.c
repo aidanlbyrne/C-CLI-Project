@@ -23,31 +23,31 @@ void addNode(char* task)
     if (head == NULL)
     {
         new = malloc(sizeof(Node));
-        // if (new == NULL){return NULL;}
+        memset(new->detail, '\0', DAX);
 
         new->priority = 1;
-        // new->task = task;
         strcpy(new->task, task);
         head = new;
         new->next = NULL;
 
   } else {
-      new = malloc(sizeof(Node));
-      Node *current = head;
+        new = malloc(sizeof(Node));
+        memset(new->detail, '\0', DAX);
+        Node *current = head;
       // if (new == NULL){return  NULL;}
       
-      while (current->next)
-      {
-        current = current->next;
-      }
+        while (current->next)
+        {
+            current = current->next;
+        }
       
-      new->priority = current->priority + 1;
-      // new->task = task;
-      strcpy(new->task, task);
-      new->next = NULL;
-      current->next = new; 
-  }
-  return;
+        new->priority = current->priority + 1;
+       // new->task = task;
+        strcpy(new->task, task);
+        new->next = NULL;
+        current->next = new; 
+    }
+    return;
 }
 // delete a node from the list
 int deleteNode(int pri)
@@ -81,7 +81,7 @@ int insertNode(int pri, char* task)
     Node *current = head;
     Node *prev = NULL;
     Node *new = malloc(sizeof(Node));
-
+    memset(new->detail, '\0', DAX);
     new->priority = pri;
     strcpy(new->task, task);
 
