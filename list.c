@@ -243,13 +243,23 @@ void printOptions(void)
     printf("5. Edit a Task\n");
     printf("9. Quit\n");
 }
+// get option
+void get_task(char *task)
+{
+    fgets(task, MAX, stdin);
+    task[strcspn(task, "\n")]=0;
+    
+    char c;
+    while((c = getchar())!= '\n' && c != EOF);
+    return;
+}
 
 int main(int argc, char** argv)
 {
     
     int option = -1;
     int length = 0;
-    char task[MAX];
+    char task[MAX]; 
     int pri;
     printf("Welcome to the To-Do app\n");
     
@@ -265,19 +275,14 @@ int main(int argc, char** argv)
             switch (option) {
                 case 1:
                     printf("What is your new Task?\n");
-                    fgets(task, MAX, stdin);
-                    task[strcspn(task, "\n")] = 0;
+                    get_task(task);
                     addNode(task);
-                    printf("added\n");
-                    // reassign(head);
                     renumberList(&length);
-                    // option = -1;
                     break;
+
                 case 2:
                     printf("What is your new Task\n");
-                    // scanf("%s", task);
-                    fgets(task, MAX, stdin);
-                    task[strcspn(task, "\n")] = 0;
+                    get_task(task);
                     printf("What priority does this task have:  ");
                     scanf("%d", &pri);
                     getchar();
@@ -289,8 +294,8 @@ int main(int argc, char** argv)
                         printf("Noded added to end of list\n");
                     }
                     renumberList(&length);
-                                // reassign(head);
                     break;
+
                 case 3:
                     printf("What task have you completed?\n");
                     printf("Priority: ");
