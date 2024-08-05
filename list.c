@@ -50,7 +50,7 @@ void add_node(char* task)
     return;
 }
 // delete a node from the list
-int deleteNode(int priority)
+int delete_node(int priority)
 {
   Node *current = head;
   Node *prev = NULL;
@@ -76,7 +76,7 @@ int deleteNode(int priority)
     return 0;
 }
 // insert a node into a position in the list
-int insertNode(int priority, char* task)
+int insert_node(int priority, char* task)
 {
     Node *current = head;
     Node *prev = NULL;
@@ -109,7 +109,7 @@ int insertNode(int priority, char* task)
 }
 
 // print full list
-void printList(void)
+void print_list(void)
 {
     Node *current = head;
     printf("\x1b[2J");
@@ -127,7 +127,7 @@ void printList(void)
 }
 
 // Edit a Node
-void editNode(int priority)
+void edit_node(int priority)
 {
     Node *current = head;
     char edit[MAX];
@@ -151,7 +151,7 @@ void editNode(int priority)
 }
 
 // Reorganize Priority list
-void renumberList(int *length)
+void renumber_list(int *length)
 {
     int priority = 1;
     Node *current = head;
@@ -165,6 +165,20 @@ void renumberList(int *length)
     *length = priority - 1;
     return;
 }
+
+// clear multiple
+/**
+    enter clear mode
+    give start number
+    cycle through list to find start
+    if (start not found){priority not found}
+    give end
+    cycle through list to find end set up:
+    * keep loop going until int
+    * while loop 
+
+*/
+
 
 /**  Reassign list
 void reassign(Node *head)
@@ -186,7 +200,7 @@ void reassign(Node *head)
 */
 
 // options
-void printOptions(void)
+void print_options(void)
 {
     printf("1. Add a task\n");
     printf("2. Insert task into list\n");
@@ -225,8 +239,8 @@ int main(int argc, char** argv)
 
     while(option != 9)
     {
-        printList();        
-        printOptions();
+        print_list();        
+        print_options();
         int num = scanf("%d", &option);
         getchar(); 
         if (num == 1 && option > 0 && option <= 9)
@@ -236,7 +250,7 @@ int main(int argc, char** argv)
                     printf("What is your new Task?\n");
                     get_task(task);
                     add_node(task);
-                    renumberList(&length);
+                    renumber_list(&length);
                     break;
 
                 case 2:
@@ -245,38 +259,38 @@ int main(int argc, char** argv)
                     printf("What priority does this task have:  ");
                     scanf("%d", &priority);
                     getchar();
-                    int done = insertNode(priority, task);
+                    int done = insert_node(priority, task);
                     if (done)
                     {
                         printf("Node successfully added!\n");
                     } else {
                         printf("Noded added to end of list\n");
                     }
-                    renumberList(&length);
+                    renumber_list(&length);
                     break;
 
                 case 3:
                     printf("What task have you completed?\n");
                     printf("Priority: ");
                     scanf("%d", &priority);
-                    int success = deleteNode(priority);
+                    int success = delete_node(priority);
                     if (success)
                     {
                         printf("Task successfully removed from list\n");
-                        renumberList(&length);
+                        renumber_list(&length);
                     } else {
                         printf("No task in list had provided priority\n");
                         printf("No changes made\n");
                     }
                     break;
                 case 4:
-                    printList();
+                    print_list();
                     break;
                 case 5:
                     printf("What priority would you like to edit:  ");
                     scanf("%d", &priority);
                     getchar();
-                    editNode(priority);
+                    edit_node(priority);
                     break;
                     
                 case 9:
