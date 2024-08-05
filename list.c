@@ -275,27 +275,6 @@ void get_int(int *num)
     return;
 }
 // get option
-void get_task(char *task)
-{
-    fgets(task, MAX, stdin);
-    task[strcspn(task, "\n")]=0;
-    
-    /**
-    char c;
-    while((c = getchar())!= '\n' && c != EOF);
-    */
-    return;
-}
-
-// get priority
-void get_int(int *num)
-{
-    scanf("%d", num);
-    char c;
-    while((c = getchar()) != '\n' && c != EOF);
-
-    return;
-}
 
 int main(int argc, char** argv)
 {
