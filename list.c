@@ -128,8 +128,12 @@ void printList(void)
 // Edit a Node
 void editNode(int priority)
 {
+    printf("start of edit_node\n");
     Node *current = head;
+    Node *prev = head;
     char edit[MAX];
+
+    /**
     while (current)
     {
         if (current->priority != priority)
@@ -139,8 +143,42 @@ void editNode(int priority)
             break;
         }
     }
+
+    ***** from insert_node *****
+    while (current)
+    {
+        if (current->priority == priority)
+        {
+            if (current == head)
+            {
+                new->next = head;
+                head = new;
+                return 1;
+            } else {
+                new->next = current;
+                prev->next = new;
+                return 1;
+            }
+        }
+        prev = current;
+        current = current->next;
+    }
+    */
+    while (current)
+    {
+        if (current->priority == priority)
+        {
+            break;
+        }
+        current = current->next;
+    }
+
+    if (current == NULL)
+    {
+        current = prev;
+    }
+
     printf("%s\n", current->task);
-    // pop
     
     fgets(edit, MAX, stdin);
     edit[strcspn(edit, "\n")] = 0;
