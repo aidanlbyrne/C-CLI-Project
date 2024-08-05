@@ -16,7 +16,7 @@ Node *head = NULL;
  
 // strcspn
 // add a node to the list
-void addNode(char* task)
+void add_node(char* task)
 {
     Node *new = NULL;
     
@@ -50,14 +50,14 @@ void addNode(char* task)
     return;
 }
 // delete a node from the list
-int deleteNode(int pri)
+int deleteNode(int priority)
 {
   Node *current = head;
   Node *prev = NULL;
 
     while (current)
     {
-        if (current->priority == pri)
+        if (current->priority == priority)
         {
             if (current == head)
             {
@@ -76,18 +76,18 @@ int deleteNode(int pri)
     return 0;
 }
 // insert a node into a position in the list
-int insertNode(int pri, char* task)
+int insertNode(int priority, char* task)
 {
     Node *current = head;
     Node *prev = NULL;
     Node *new = malloc(sizeof(Node));
     memset(new->detail, '\0', DAX);
-    new->priority = pri;
+    new->priority = priority;
     strcpy(new->task, task);
 
     while (current)
     {
-        if (current->priority == pri)
+        if (current->priority == priority)
         {
             if (current == head)
             {
@@ -127,13 +127,13 @@ void printList(void)
 }
 
 // Edit a Node
-void editNode(int pri)
+void editNode(int priority)
 {
     Node *current = head;
     char edit[MAX];
     while (current)
     {
-        if (current->priority != pri)
+        if (current->priority != priority)
         {
             current = current->next;
         } else {
@@ -153,65 +153,17 @@ void editNode(int pri)
 // Reorganize Priority list
 void renumberList(int *length)
 {
-    int pri = 1;
+    int priority = 1;
     Node *current = head;
 
     while (current)
     {
-        current->priority = pri;
+        current->priority = priority;
         current=current->next;
-        pri++;
+        priority++;
     }
-    *length = pri - 1;
+    *length = priority - 1;
     return;
-}
-
-// clear multiple
-/**
-    enter clear mode
-    give start number
-    cycle through list to find start
-    if (start not found){pri not found}
-    give end
-    cycle through list to find end 
-    set up:
-    * keep loop going until int
-    * while loop 
-
-*/
-
-int clearSet(int *length)
-{
-    Node *current = head;
-    int start = -1;
-    while (start != 0)
-    {
-        scanf("%d", &start);
-        getchar();
-        while (current->priority != start)
-        {
-            current = current->next;
-        }
-    }
-
-    return 0;
-}
-int party(void)
-{
-    int start = -1;
-    int end = -1;
-
-    while(1)
-    {
-        scanf("%d", &start);
-        getchar();
-        if (start ==0)
-        {
-            break;
-        }
-
-    }
-    return 0;
 }
 
 /**  Reassign list
@@ -251,7 +203,14 @@ void get_task(char *task)
     
     char c;
     while((c = getchar())!= '\n' && c != EOF);
+
     return;
+}
+
+// get priority
+void get_priority(int *priority)
+{
+
 }
 
 int main(int argc, char** argv)
@@ -260,7 +219,7 @@ int main(int argc, char** argv)
     int option = -1;
     int length = 0;
     char task[MAX]; 
-    int pri;
+    int priority;
     printf("Welcome to the To-Do app\n");
     
 
@@ -276,7 +235,7 @@ int main(int argc, char** argv)
                 case 1:
                     printf("What is your new Task?\n");
                     get_task(task);
-                    addNode(task);
+                    add_node(task);
                     renumberList(&length);
                     break;
 
@@ -284,9 +243,9 @@ int main(int argc, char** argv)
                     printf("What is your new Task\n");
                     get_task(task);
                     printf("What priority does this task have:  ");
-                    scanf("%d", &pri);
+                    scanf("%d", &priority);
                     getchar();
-                    int done = insertNode(pri, task);
+                    int done = insertNode(priority, task);
                     if (done)
                     {
                         printf("Node successfully added!\n");
@@ -299,8 +258,8 @@ int main(int argc, char** argv)
                 case 3:
                     printf("What task have you completed?\n");
                     printf("Priority: ");
-                    scanf("%d", &pri);
-                    int success = deleteNode(pri);
+                    scanf("%d", &priority);
+                    int success = deleteNode(priority);
                     if (success)
                     {
                         printf("Task successfully removed from list\n");
@@ -315,15 +274,69 @@ int main(int argc, char** argv)
                     break;
                 case 5:
                     printf("What priority would you like to edit:  ");
-                    scanf("%d", &pri);
+                    scanf("%d", &priority);
                     getchar();
-                    editNode(pri);
+                    editNode(priority);
                     break;
                     
                 case 9:
                     break;
             }
         }
+    }
+    return 0;
+}
+
+
+// staging
+
+// clear multiple
+/**
+    enter clear mode
+    give start number
+    cycle through list to find start
+    if (start not found){pri not found}
+    give end
+    cycle through list to find end 
+    set up:
+    * keep loop going until int
+    * while loop 
+
+*/
+
+
+int clearSet(int *length)
+{
+    Node *current = head;
+    int start = -1;
+    while (start != 0)
+    {
+        scanf("%d", &start);
+        getchar();
+        while (current->priority != start)
+        {
+            current = current->next;
+        }
+    }
+
+    return 0;
+}
+
+
+int party(void)
+{
+    int start = -1;
+    int end = -1;
+
+    while(1)
+    {
+        scanf("%d", &start);
+        getchar();
+        if (start ==0)
+        {
+            break;
+        }
+
     }
     return 0;
 }
