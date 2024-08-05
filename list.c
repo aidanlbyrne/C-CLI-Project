@@ -164,6 +164,12 @@ void edit_node(int priority)
         current = current->next;
     }
     */
+    if (head == NULL)
+    {
+        printf("No task to edit\n");
+        return;
+    }
+
     while (current)
     {
         if (current->priority == priority)
@@ -242,9 +248,9 @@ void print_options(void)
     printf("1. Add a task\n");
     printf("2. Insert task into list\n");
     printf("3. Delete a task\n");
-    printf("4. Read List\n");
     printf("5. Edit a Task\n");
     printf("9. Quit\n");
+    printf("11. Refresh Screen\n");
 }
 // get option
 void get_task(char *task)
@@ -336,7 +342,7 @@ int main(int argc, char** argv)
                         printf("No changes made\n");
                     }
                     break;
-                case 4:
+                case 11:
                     print_list();
                     break;
                 case 5:
