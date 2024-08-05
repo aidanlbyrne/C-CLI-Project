@@ -49,7 +49,7 @@ void add_node(char* task)
     return;
 }
 // delete a node from the list
-int deleteNode(int priority)
+int delete_node(int priority)
 {
   Node *current = head;
   Node *prev = NULL;
@@ -75,7 +75,7 @@ int deleteNode(int priority)
     return 0;
 }
 // insert a node into a position in the list
-int insertNode(int priority, char* task)
+int insert_node(int priority, char* task)
 {
     Node *current = head;
     Node *prev = NULL;
@@ -108,7 +108,7 @@ int insertNode(int priority, char* task)
 }
 
 // print full list
-void printList(void)
+void print_list(void)
 {
     Node *current = head;
     printf("\x1b[2J");
@@ -126,7 +126,7 @@ void printList(void)
 }
 
 // Edit a Node
-void editNode(int priority)
+void edit_node(int priority)
 {
     printf("start of edit_node\n");
     Node *current = head;
@@ -164,6 +164,12 @@ void editNode(int priority)
         current = current->next;
     }
     */
+    if (head == NULL)
+    {
+        printf("No task to edit\n");
+        return;
+    }
+
     while (current)
     {
         if (current->priority == priority)
@@ -188,7 +194,7 @@ void editNode(int priority)
 }
 
 // Reorganize Priority list
-void renumberList(int *length)
+void renumber_list(int *length)
 {
     int priority = 1;
     Node *current = head;
@@ -202,6 +208,20 @@ void renumberList(int *length)
     *length = priority - 1;
     return;
 }
+
+// clear multiple
+/**
+    enter clear mode
+    give start number
+    cycle through list to find start
+    if (start not found){priority not found}
+    give end
+    cycle through list to find end set up:
+    * keep loop going until int
+    * while loop 
+
+*/
+
 
 /**  Reassign list
 void reassign(Node *head)
@@ -223,14 +243,36 @@ void reassign(Node *head)
 */
 
 // options
-void printOptions(void)
+void print_options(void)
 {
     printf("1. Add a task\n");
     printf("2. Insert task into list\n");
     printf("3. Delete a task\n");
-    printf("4. Read List\n");
     printf("5. Edit a Task\n");
     printf("9. Quit\n");
+    printf("11. Refresh Screen\n");
+}
+// get option
+void get_task(char *task)
+{
+    fgets(task, MAX, stdin);
+    task[strcspn(task, "\n")]=0;
+    
+    /**
+    char c;
+    while((c = getchar())!= '\n' && c != EOF);
+    */
+    return;
+}
+
+// get priority
+void get_int(int *num)
+{
+    scanf("%d", num);
+    char c;
+    while((c = getchar()) != '\n' && c != EOF);
+
+    return;
 }
 // get option
 void get_task(char *task)
@@ -284,7 +326,7 @@ int main(int argc, char** argv)
                     printf("What is your new Task?\n");
                     get_task(task);
                     add_node(task);
-                    renumberList(&length);
+                    renumber_list(&length);
                     break;
 
                 case 2:
@@ -299,7 +341,7 @@ int main(int argc, char** argv)
                     } else {
                         printf("Noded added to end of list\n");
                     }
-                    renumberList(&length);
+                    renumber_list(&length);
                     break;
 
                 case 3:
@@ -312,14 +354,14 @@ int main(int argc, char** argv)
                     if (success)
                     {
                         printf("Task successfully removed from list\n");
-                        renumberList(&length);
+                        renumber_list(&length);
                     } else {
                         printf("No task in list had provided priority\n");
                         printf("No changes made\n");
                     }
                     break;
-                case 4:
-                    printList();
+                case 11:
+                    print_list();
                     break;
                 case 5:
                     printf("What priority would you like to edit:  ");
