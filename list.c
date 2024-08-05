@@ -4,6 +4,8 @@
 
 #define MAX 64
 #define DAX 128
+#define PAR 8
+
 
 typedef struct {
     int priority;
