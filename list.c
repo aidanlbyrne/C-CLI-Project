@@ -14,7 +14,6 @@ typedef struct {
 
 Node *head = NULL;
  
-// strcspn
 // add a node to the list
 void add_node(char* task)
 {
@@ -201,16 +200,21 @@ void get_task(char *task)
     fgets(task, MAX, stdin);
     task[strcspn(task, "\n")]=0;
     
+    /**
     char c;
     while((c = getchar())!= '\n' && c != EOF);
-
+    */
     return;
 }
 
 // get priority
-void get_priority(int *priority)
+void get_int(int *num)
 {
+    scanf("%d", num);
+    char c;
+    while((c = getchar()) != '\n' && c != EOF);
 
+    return;
 }
 
 int main(int argc, char** argv)
@@ -225,11 +229,17 @@ int main(int argc, char** argv)
 
     while(option != 9)
     {
-        printList();        
-        printOptions();
+        print_list();        
+        print_options();
+        /**
         int num = scanf("%d", &option);
-        getchar(); 
-        if (num == 1 && option > 0 && option <= 9)
+
+        char c;
+        while((c = getchar())!= '\n' && c != EOF);
+        */
+        get_int(&option);
+
+        if ( option > 0 && option <= 9)
         {
             switch (option) {
                 case 1:
@@ -243,9 +253,8 @@ int main(int argc, char** argv)
                     printf("What is your new Task\n");
                     get_task(task);
                     printf("What priority does this task have:  ");
-                    scanf("%d", &priority);
-                    getchar();
-                    int done = insertNode(priority, task);
+                    get_int(&priority);
+                    int done = insert_node(priority, task);
                     if (done)
                     {
                         printf("Node successfully added!\n");
@@ -258,8 +267,10 @@ int main(int argc, char** argv)
                 case 3:
                     printf("What task have you completed?\n");
                     printf("Priority: ");
-                    scanf("%d", &priority);
-                    int success = deleteNode(priority);
+                    // scanf("%d", &priority);
+                    get_int(&priority);
+
+                    int success = delete_node(priority);
                     if (success)
                     {
                         printf("Task successfully removed from list\n");
@@ -274,9 +285,8 @@ int main(int argc, char** argv)
                     break;
                 case 5:
                     printf("What priority would you like to edit:  ");
-                    scanf("%d", &priority);
-                    getchar();
-                    editNode(priority);
+                    get_int(&priority);
+                    edit_node(priority);
                     break;
                     
                 case 9:
