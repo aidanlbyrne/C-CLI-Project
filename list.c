@@ -298,7 +298,7 @@ int main(int argc, char** argv)
         */
         get_int(&option);
 
-        if ( option > 0 && option <= 9)
+        if ( option > 0 && option <= 99)
         {
             switch (option) {
                 case 1:
@@ -374,7 +374,7 @@ int main(int argc, char** argv)
 */
 
 
-int clearSet(int *length)
+int clear_set(int *length)
 {
     Node *current = head;
     int start = -1;
