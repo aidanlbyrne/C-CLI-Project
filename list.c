@@ -12,6 +12,9 @@ typedef struct {
     void *next;
 } Node;
 
+//function prototypes
+void get_text(char* detail);
+
 Node *head = NULL;
  
 // add a node to the list
@@ -192,6 +195,30 @@ void edit_node(int priority)
     return;
 }
 
+// edit the details of a node
+void edit_detail(int priority) {
+
+    Node *current = head;
+    char text[DMAX];
+
+    while (current)
+    {
+        if (current->priority == priority)
+        {
+            // target node reachec
+            printf("%s\n", current->detail);
+            get_text(text);
+            if (text[0] != '\0' && text[0] != '\n')
+            {
+                strcpy(current->detail, text);
+            }
+            return;
+        }
+        current = current->next;
+    }
+    return;
+}
+
 // Reorganize Priority list
 void renumber_list(int *length)
 {
@@ -261,6 +288,14 @@ void get_task(char *task)
     char c;
     while((c = getchar())!= '\n' && c != EOF);
     */
+    return;
+}
+
+void get_text(char *detail)
+{
+    fgets(detail, DMAX, stdin);
+    detail[strcspn(detail, "\n")]=0;
+    
     return;
 }
 
@@ -345,6 +380,11 @@ int main(int argc, char** argv)
                     printf("What priority would you like to edit:  ");
                     get_int(&priority);
                     edit_node(priority);
+                    break;
+                case 7:
+                    printf("What priority is the detail you'd like to edit:  ");
+                    get_int(&priority);
+                    edit_detail(priority);
                     break;
                     
                 case 9:
