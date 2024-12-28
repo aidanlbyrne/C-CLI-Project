@@ -274,7 +274,8 @@ void print_options(void)
     printf("1. Add a task\n");
     printf("2. Insert task into list\n");
     printf("3. Delete a task\n");
-    printf("5. Edit a Task\n");
+    printf("5. Edit a task\n");
+    printf("7. Edit a task detail\n");
     printf("9. Quit\n");
     printf("11. Refresh Screen\n");
 }
@@ -373,20 +374,23 @@ int main(int argc, char** argv)
                         printf("No changes made\n");
                     }
                     break;
-                case 11:
-                    print_list();
-                    break;
+
                 case 5:
                     printf("What priority would you like to edit:  ");
                     get_int(&priority);
                     edit_node(priority);
                     break;
+
                 case 7:
                     printf("What priority is the detail you'd like to edit:  ");
                     get_int(&priority);
                     edit_detail(priority);
                     break;
-                    
+
+                case 11:
+                    print_list();
+                    break;
+
                 case 9:
                     break;
             }
