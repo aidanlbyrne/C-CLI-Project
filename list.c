@@ -3,12 +3,12 @@
 #include <string.h>
 
 #define MAX 64
-#define DAX 128
+#define DMAX 128
 
 typedef struct {
     int priority;
     char task[MAX];
-    char detail[DAX];
+    char detail[DMAX];
     void *next;
 } Node;
 
@@ -22,7 +22,7 @@ void add_node(char* task)
     if (head == NULL)
     {
         new = malloc(sizeof(Node));
-        memset(new->detail, '\0', DAX);
+        memset(new->detail, '\0', DMAX);
 
         new->priority = 1;
         strcpy(new->task, task);
@@ -31,9 +31,8 @@ void add_node(char* task)
 
   } else {
         new = malloc(sizeof(Node));
-        memset(new->detail, '\0', DAX);
+        memset(new->detail, '\0', DMAX);
         Node *current = head;
-      // if (new == NULL){return  NULL;}
       
         while (current->next)
         {
@@ -80,7 +79,7 @@ int insert_node(int priority, char* task)
     Node *current = head;
     Node *prev = NULL;
     Node *new = malloc(sizeof(Node));
-    memset(new->detail, '\0', DAX);
+    memset(new->detail, '\0', DMAX);
     new->priority = priority;
     strcpy(new->task, task);
 

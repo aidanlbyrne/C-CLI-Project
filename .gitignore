@@ -1,0 +1,10 @@
+## text files
+*.txt 
+
+## object files
+*.o 
+
+## executables
+*.out
+*.exe 
+*.app
